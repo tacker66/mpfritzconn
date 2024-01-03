@@ -1,0 +1,11 @@
+{
+  "name": "mpfritzconn",
+  "version": "1.0.0",
+  "urls": [
+    ["md5.py", "github:tacker66/mpfritzconn/md5.py"],
+    ["mpfritzconn.py", "github:tacker66/mpfritzconn/mpfritzconn.py"],
+  ]
+  "deps": [
+    ["requests", "latest"],
+  ]
+}
