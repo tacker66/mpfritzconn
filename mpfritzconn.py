@@ -7,7 +7,7 @@
 #
 # As MicroPython lacks proper implementations of an XML parser, MD5 hash generation
 # and UTF-16LE string encoding these things are all done by hand in a minimalistic way:
-#   - Extracting SID and Challenge from the FritBox's XML response is done by string.replace()/.split()/.tok() with some magic chars
+#   - Extracting SID and Challenge from the FritBox's XML response is done by string.replace()/split() with some magic chars
 #   - The UTF-16LE encoding of the Challenge Response is done in MicroPython and only works for ASCII strings
 #   - The MD5 hash for the Challenge Response is computed using Mauro Rivas MicroPython implementation (Thx!)
 #
