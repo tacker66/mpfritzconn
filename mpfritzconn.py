@@ -60,12 +60,11 @@ class MpFritzConn:
             raise Exception('access denied')
         return sid
         
-    def execute(self, cmd, ain=None):
+    def call(self, cmd, ain=None):
         if ain:
             uri = self.url + '/webservices/homeautoswitch.lua?ain=' + ain + '&switchcmd=' + cmd + '&sid=' + self.sid
         else:
             uri = self.url + '/webservices/homeautoswitch.lua?switchcmd=' + cmd + '&sid=' + self.sid
-
         return requests.get(uri).text
 
 if __name__=='__main__':
@@ -74,11 +73,11 @@ if __name__=='__main__':
     pwd = "<password>"
     ain = "<DeviceAIN>"
     fc = MpFritzConn(usr, pwd, adr)
-    ret = fc.execute("getswitchname", ain)
+    ret = fc.call("getswitchname", ain)
     print("Name:", ret.strip())
-    ret = fc.execute("getswitchstate", ain)
+    ret = fc.call("getswitchstate", ain)
     print("State:", ret.strip())
-    ret = fc.execute("getswitchpower", ain)
+    ret = fc.call("getswitchpower", ain)
     print("Power:", ret.strip())
-    ret = fc.execute("gettemperature", ain)
+    ret = fc.call("gettemperature", ain)
     print("Temp:", ret.strip())
