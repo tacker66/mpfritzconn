@@ -21,8 +21,10 @@ import requests
 class MpFritzConn:
 
     def __init__(self, user, password, url):
-        self.url = url
-        self.sid = self.get_sid(user, password)
+        self.url      = url
+        self.user     = user
+        self.password = password
+        self.sid = self.get_sid()
 
     def ascii2utf16le(self, msg):
         msg = bytearray(msg.encode('utf-8'))
@@ -38,7 +40,7 @@ class MpFritzConn:
         s = s + self.ascii2utf16le(password)
         return md5.digest(s)
         
-    def get_sid(self, user, password):
+    def get_sid(self):
         r = requests.get(self.url + '/login_sid.lua')
         s = r.text
         s = s.replace("<SID>", "|")
@@ -48,8 +50,8 @@ class MpFritzConn:
         s = s.replace("</Challenge>", "€")
         cha = s.split("€")[1]
         if sid == '0000000000000000':
-            res = cha + '-' + self.get_md5(cha, password)
-            r = requests.get(self.url + '/login_sid.lua?username=' + user + '&response=' + res)
+            res = cha + '-' + self.get_md5(cha, self.password)
+            r = requests.get(self.url + '/login_sid.lua?username=' + self.user + '&response=' + res)
             s = r.text
             s = s.replace("<SID>", "|")
             s = s.replace("</SID>", "|")
@@ -63,6 +65,7 @@ class MpFritzConn:
             uri = self.url + '/webservices/homeautoswitch.lua?ain=' + ain + '&switchcmd=' + cmd + '&sid=' + self.sid
         else:
             uri = self.url + '/webservices/homeautoswitch.lua?switchcmd=' + cmd + '&sid=' + self.sid
+
         return requests.get(uri).text
 
 if __name__=='__main__':
