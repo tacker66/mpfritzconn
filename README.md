@@ -1,6 +1,6 @@
 # mpfritzconn
 
-A minimalistic solution to connect to an AVM FritzBox using MicroPython
+A minimalistic solution to connect to an AVM FritzBox using MicroPython.
 
 FritzBox API:
   - https://avm.de/fileadmin/user_upload/Global/Service/Schnittstellen/AHA-HTTP-Interface.pdf
